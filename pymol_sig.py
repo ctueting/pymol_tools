@@ -1,6 +1,8 @@
 # ray signature v2 by Christian Tueting (c) 2022
 SIGNATURE_TOGGLE = False
-def render_signature(k=True):
+def render_signature():
+    global SIGNATURE_TOGGLE
+    
     if not SIGNATURE_TOGGLE:
         cmd.set("ray_trace_gain",1)
         cmd.set("antialias",1)
