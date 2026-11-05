@@ -1,6 +1,7 @@
 # ray signature v2 by Christian Tueting (c) 2022
-def signature(k=True):
-    if k:
+SIGNATURE_TOGGLE = False
+def render_signature(k=True):
+    if not SIGNATURE_TOGGLE:
         cmd.set("ray_trace_gain",1)
         cmd.set("antialias",1)
         cmd.set("antialias_shader",2)
@@ -25,6 +26,7 @@ def signature(k=True):
         cmd.set("cartoon_side_chain_helper","on")
         cmd.bg_color("white")
         cmd.set("ray_opaque_background",1)
+        SIGNATURE_TOGGLE = True
     else:
         #default values
         cmd.set("ray_trace_gain",0.12000)
@@ -50,3 +52,6 @@ def signature(k=True):
         cmd.set("cartoon_side_chain_helper","off")
         cmd.set("ray_opaque_background",-1)
         cmd.bg_color("black")
+        SIGNATURE_TOGGLE = False
+
+cmd.extend("signature", render_signature)
