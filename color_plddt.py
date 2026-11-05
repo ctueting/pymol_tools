@@ -1,9 +1,9 @@
 def color_plddt(selection="all"):
     plddt_bins = [
-        (0, 50, "0xE08155"),
-        (50, 70, "0xF9DC4D"),
-        (70, 90, "0x7FC8ED"),
-        (90, 101, "0x37569D")
+        (0, 50, "0xFF7D45"),     # Orange
+        (50, 70, "0xFFDB13"),    # Yellow
+        (70, 90, "0x65CBF3"),    # Light blue
+        (90, 101, "0x0053D6")    # Dark blue
     ]
 
     # Validate B-factors
