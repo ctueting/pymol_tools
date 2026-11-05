@@ -5,9 +5,8 @@
 
 # As this is now a python script, we can use comments, function, and everything we learned in our Python session
 
-# This DELETES EVERY OBJECT
-# Just for debugging and to have a fresh start
-cmd.delete('*')
+# Reinitialize the PyMOL session
+cmd.reinitialize()
 
 # Load a molecule
 cmd.fetch('1B38')
@@ -66,6 +65,12 @@ print(f'{"ATPAtom":>8}{"Chain":>7}{"Resn":>7}{"Resi":>7}{"Atom":>7}{"Dist":>7}')
 for entry in results:
     ATPAtom, Chain, Resn, Resi, Atom, Dist = entry
     print(f'{ATPAtom:>8}{Chain:>7}{Resn:>7}{Resi:>7}{Atom:>7}{Dist:>7.2f}')
+
+# Additionally, save those distances as tsv file
+with open('distances.tsv', 'w') as f:
+    f.write("ATPAtom\tChain\tResn\tResi\tAtom\tDistance\n")
+    for entry in results:
+        f.write("\t".join(list(map(str,entry))) + "\n")
 
 # additionally, make a nice representation of the interaction network
 
