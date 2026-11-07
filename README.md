@@ -21,7 +21,7 @@ Download the scripts you want to use:
 - [`color_plddt.py`](color_plddt.py) — color structures by pLDDT.
 - [`fetchAF2.py`](fetchAF2.py) — retrieve structures from the AlphaFold Protein Structure Database.
 - [`pymol_sig.py`](pymol_sig.py) — apply a custom rendering signature.
-- `display_pae.py` — display and interact with AlphaFold PAE matrices (**add this script to the repository before using the link**).
+- [`display_pae.py`](display_pae.py) — display and interact with AlphaFold PAE matrices.
 
 Drag and drop each Python file into the PyMOL window, or load it explicitly:
 
