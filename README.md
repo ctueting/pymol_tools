@@ -4,34 +4,74 @@ A collection of Python scripts extending [PyMOL](https://pymol.org/) with utilit
 
 ## Installation
 
-### Option 1: Load directly from GitHub Pages (recommended)
+### Option 1: One-time installation (recommended)
 
-Enter the following command in the PyMOL command line:
+The installer downloads all available tools and combines them into a single Python file (`.pymol_tools.py`) in your home directory.
+
+In the PyMOL command line, enter:
+
+```pymol
+run https://ctueting.github.io/pymol_tools/install.py
+```
+
+Then install the tools:
+
+```python
+install()
+```
+
+If the tools are already installed, you can overwrite the existing installation:
+
+```python
+install(True)
+```
+
+To install the tools and automatically load them whenever PyMOL starts:
+
+```python
+install(True, True)
+```
+
+The latter also updates your `.pymolrc` configuration file, adding the following entry (with the appropriate path for your operating system):
+
+```pymol
+### PyMOL tools START ###
+run /path/to/home/.pymol_tools.py
+### PyMOL tools END ###
+```
+
+The installer works on **macOS, Linux, and Windows**.
+
+**Note:** The tools are stored locally. To update them to the latest version, simply rerun the installer with `install(True)`. If you have already configured automatic loading, the existing `.pymolrc` entry will continue to work.
+
+### Option 2: Load directly from GitHub Pages
+
+For temporary use without installation, enter:
 
 ```pymol
 run https://ctueting.github.io/pymol_tools/tools.py
 ```
 
-This loads the functions included in `tools.py` without manually downloading their individual scripts. The functions must be loaded again after restarting PyMOL.
+This loads all functions referenced by `tools.py` directly from the online repository.
 
-### Option 2: Download and run locally
+The functions must be loaded again after restarting PyMOL.
 
-Download the scripts you want to use:
+### Option 3: Download individual scripts
+
+Alternatively, download only the scripts you want to use:
 
 - [`color_plddt.py`](color_plddt.py) — color structures by pLDDT.
 - [`fetchAF2.py`](fetchAF2.py) — retrieve structures from the AlphaFold Protein Structure Database.
 - [`pymol_sig.py`](pymol_sig.py) — apply a custom rendering signature.
 - [`display_pae.py`](display_pae.py) — display and interact with AlphaFold PAE matrices.
 
-Drag and drop each Python file into the PyMOL window, or load it explicitly:
+Drag and drop the downloaded Python files into the PyMOL window, or load them explicitly:
 
 ```pymol
 run /path/to/display_pae.py
 ```
 
-### Option 3: Load automatically with `.pymolrc`
-
-To make the functions available whenever PyMOL starts, open **File → Edit pymolrc** and add the paths to your locally saved scripts:
+To load individual scripts automatically, open **File → Edit pymolrc** and add the corresponding commands:
 
 ```pymol
 run /path/to/color_plddt.py
@@ -40,13 +80,15 @@ run /path/to/pymol_sig.py
 run /path/to/display_pae.py
 ```
 
-Alternatively, add the online loader to `.pymolrc`:
+## Updates
 
-```pymol
-run https://ctueting.github.io/pymol_tools/tools.py
-```
+The collection may be extended with additional tools in the future.
 
-This loads the latest version of the scripts referenced by `tools.py` at startup, provided an internet connection is available.
+- **Local installation:** Run `install(True)` after loading `install.py` again to download the latest available tools.
+- **Online loading:** Running `tools.py` loads the scripts currently referenced by the online loader.
+- **Manual installation:** Download updated scripts individually.
+
+For an installation registered in `.pymolrc`, updated local tools will be loaded automatically the next time PyMOL starts.
 
 ## Usage
 
