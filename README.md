@@ -58,12 +58,7 @@ The functions must be loaded again after restarting PyMOL.
 
 ### Option 3: Download individual scripts
 
-Alternatively, download only the scripts you want to use:
-
-- [`color_plddt.py`](color_plddt.py) — color structures by pLDDT.
-- [`fetchAF2.py`](fetchAF2.py) — retrieve structures from the AlphaFold Protein Structure Database.
-- [`pymol_sig.py`](pymol_sig.py) — apply a custom rendering signature.
-- [`display_pae.py`](display_pae.py) — display and interact with AlphaFold PAE matrices.
+Alternatively, download only the scripts you want to use.
 
 Drag and drop the downloaded Python files into the PyMOL window, or load them explicitly:
 
@@ -74,9 +69,6 @@ run /path/to/display_pae.py
 To load individual scripts automatically, open **File → Edit pymolrc** and add the corresponding commands:
 
 ```pymol
-run /path/to/color_plddt.py
-run /path/to/fetchAF2.py
-run /path/to/pymol_sig.py
 run /path/to/display_pae.py
 ```
 
@@ -84,7 +76,7 @@ run /path/to/display_pae.py
 
 The collection may be extended with additional tools in the future.
 
-- **Local installation:** Run `install(True)` after loading `install.py` again to download the latest available tools.
+- **Local installation:** Run `update_pymol_tools True, True` to fetch the latest file, overwrite the local copy, and update pymolrc
 - **Online loading:** Running `tools.py` loads the scripts currently referenced by the online loader.
 - **Manual installation:** Download updated scripts individually.
 
