@@ -1,3 +1,4 @@
+
 import json
 from pathlib import Path
 from urllib.request import urlopen
@@ -5,7 +6,7 @@ from pymol import cmd
 
 
 def download_alphafold(uniprot_id, fmt="cif"):
-    """Download the latest AlphaFold DB structure for a UniProt ID."""
+    """Download an AlphaFold DB structure and its PAE matrix."""
 
     fmt = fmt.lower()
 
@@ -21,14 +22,27 @@ def download_alphafold(uniprot_id, fmt="cif"):
     if not data:
         raise ValueError(f"No AlphaFold structure found for {uniprot_id}.")
 
-    # Select structure format
-    url = data[0]["pdbUrl" if fmt == "pdb" else "cifUrl"]
+    prediction = data[0]
 
     # Download structure
+    url = prediction["pdbUrl" if fmt == "pdb" else "cifUrl"]
     filename = Path(f"{uniprot_id}.{fmt}")
 
     with urlopen(url, timeout=120) as response:
         filename.write_bytes(response.read())
+
+    # Download PAE matrix
+    with urlopen(prediction["paeDocUrl"], timeout=120) as response:
+        pae_data = json.load(response)
+
+    # Convert AlphaFold DB format to AlphaFold 3 format
+    pae = {"PAE": pae_data[0]["predicted_aligned_error"]}
+
+    # Save converted PAE JSON
+    json_filename = filename.with_suffix(".json")
+
+    with json_filename.open("w") as f:
+        json.dump(pae, f, separators=(",", ":"))
 
     return filename
 
@@ -39,10 +53,8 @@ def fetchAF2(uniprot_id, fmt="cif"):
     try:
         filename = download_alphafold(uniprot_id, fmt)
 
-        print(
-            f"The file was downloaded and saved here: "
-            f"{filename.resolve()}"
-        )
+        print(f"Structure saved: {filename.resolve()}")
+        print(f"PAE saved:       {filename.with_suffix('.json').resolve()}")
 
     except Exception as e:
         print(
