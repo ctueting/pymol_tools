@@ -606,6 +606,7 @@ def display_pae(confidence_path, object_name=None):
             raise ValueError(f"PyMOL object '{object_name}' not found.")
         window.object_box.setCurrentIndex(index)
 
+    return window
 
 def show_pae(object):
     """
@@ -629,8 +630,6 @@ cmd.auto_arg[0]['show_pae'] = [
     'object',
     ' '
 ]
-
-    return window
 
 # PyMOL CLI usage: display_pae path/to/confidences.json
 cmd.extend("display_pae", display_pae)
