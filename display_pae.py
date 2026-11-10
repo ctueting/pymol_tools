@@ -19,6 +19,8 @@ from pymol.Qt import QtWidgets, QtGui, QtCore
 from pymol.Qt import PYQT_NAME
 import importlib
 
+from pymol import stored
+
 QtSvg = importlib.import_module(f"{PYQT_NAME}.QtSvg")
 
 # When executed using PyMOL's `run`, `cmd` is normally available.
@@ -603,6 +605,30 @@ def display_pae(confidence_path, object_name=None):
         if index < 0:
             raise ValueError(f"PyMOL object '{object_name}' not found.")
         window.object_box.setCurrentIndex(index)
+
+
+def show_pae(object):
+    """
+    Show the PAE plot of a selected model. The function validates, if a json_path is already associated
+    """
+
+    model_paths = getattr(stored, "ctueting_model_paths", {})
+
+    if object not in _model_paths:
+        raise ValueError(f"{object} does not have a registered data JSON. \nPlease use `associate_pae {object}, /path/to/data.json` to associate the data file, containing the PAE values.")
+    
+    json_path = _model_paths[object]['data_json']
+    
+    display_pae(json_path, object_name=object)
+
+cmd.extend("show_pae", show_pae)
+
+# Autocomplete molecular objects for the first argument
+cmd.auto_arg[0]['show_pae'] = [
+    lambda: cmd.Shortcut(cmd.get_object_list()),
+    'object',
+    ' '
+]
 
     return window
 
