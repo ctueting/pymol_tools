@@ -17,19 +17,19 @@ run https://ctueting.github.io/pymol_tools/install.py
 Then install the tools:
 
 ```python
-install()
+install_pymol_tools()
 ```
 
 If the tools are already installed, you can overwrite the existing installation:
 
 ```python
-install(True)
+install_pymol_tools(True)
 ```
 
 To install the tools and automatically load them whenever PyMOL starts:
 
 ```python
-install(True, True)
+install_pymol_tools(True, True)
 ```
 
 The latter also updates your `.pymolrc` configuration file, adding the following entry (with the appropriate path for your operating system):
