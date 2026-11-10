@@ -72,6 +72,9 @@ def install(override=False, add_to_pymolrc=False):
 
     print(f"Installed: {OUTPUT_FILE}")
 
+    # Run the code immediatelly, so the User does not need to restart PyMOL. This is independent of writing the command in the pymolrc file
+    cmd.run({OUTPUT_FILE})
+
     # Optionally register in .pymolrc
     command = f"run {OUTPUT_FILE}"
 
