@@ -613,7 +613,7 @@ def show_pae(object):
     Show the PAE plot of a selected model. The function validates, if a json_path is already associated
     """
 
-    model_paths = getattr(stored, "ctueting_model_paths", {})
+    model_paths = getattr(stored, "alphafold_model_paths", {})
 
     if object not in _model_paths:
         raise ValueError(f"{object} does not have a registered data JSON. \nPlease use `associate_pae {object}, /path/to/data.json` to associate the data file, containing the PAE values.")
