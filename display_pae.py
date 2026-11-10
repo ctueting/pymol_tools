@@ -585,18 +585,26 @@ def show_array(array, chain_ids=None, res_ids=None, title="PAE Matrix"):
     return window
 
 
-def display_pae(confidence_path):
+def display_pae(confidence_path, object_name=None):
     path = Path(confidence_path).expanduser()
     with path.open(encoding="utf-8") as f:
         data = json.load(f)
     if "pae" not in data:
         raise ValueError(f"No 'pae' matrix in {path}")
-    return show_array(
+    window = show_array(
         data["pae"],
         chain_ids=data.get("token_chain_ids"),
         res_ids=data.get("token_res_ids"),
         title=f"PAE — {path.name}"
     )
+
+    if object_name is not None:
+        index = window.object_box.findText(object_name)
+        if index < 0:
+            raise ValueError(f"PyMOL object '{object_name}' not found.")
+        window.object_box.setCurrentIndex(index)
+
+    return window
 
 # PyMOL CLI usage: display_pae path/to/confidences.json
 cmd.extend("display_pae", display_pae)
