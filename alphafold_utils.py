@@ -84,8 +84,11 @@ def fetchAF2(uniprot_id, fmt="cif"):
     try:
         filename = download_alphafold(uniprot_id, fmt)
 
-        print(f"Structure saved: {filename.resolve()}")
-        print(f"PAE saved:       {filename.with_suffix('.json').resolve()}")
+        structure_path = str(filename.resolve())
+        pae_path = str(filename.with_suffix('.json').resolve())
+        
+        print(f"Structure saved: {structure_path}")
+        print(f"PAE saved:       {pae_path}")
 
     except Exception as e:
         print(
@@ -96,6 +99,13 @@ def fetchAF2(uniprot_id, fmt="cif"):
 
     # Load structure into PyMOL
     cmd.load(str(filename))
+
+    # Fetch the object name and register
+    object_name = cmd.get_object_list()[-1]
+    _model_paths[object_name] = {
+            'model_path' : structure_path,
+            'data_json' : pae_path)
+            }
 
     return str(filename)
 
