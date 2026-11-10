@@ -18,7 +18,7 @@ def download(url):
         return response.read().decode("utf-8")
 
 
-def install(override=False, add_to_pymolrc=False):
+def install_pymol_tools(override=False, add_to_pymolrc=False):
     """Download PyMOL tools and optionally register them in .pymolrc."""
 
     # Check existing installation
