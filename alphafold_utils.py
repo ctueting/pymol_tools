@@ -104,7 +104,7 @@ def fetchAF2(uniprot_id, fmt="cif"):
     object_name = cmd.get_object_list()[-1]
     _model_paths[object_name] = {
             'model_path' : structure_path,
-            'data_json' : pae_path)
+            'data_json' : pae_path
             }
 
     return str(filename)
