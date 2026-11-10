@@ -67,7 +67,7 @@ def download_alphafold(uniprot_id, fmt="cif"):
         pae_data = json.load(response)
 
     # Convert AlphaFold DB format to AlphaFold 3 format
-    pae = {"PAE": pae_data[0]["predicted_aligned_error"]}
+    pae = {"pae": pae_data[0]["predicted_aligned_error"]}
 
     # Save converted PAE JSON
     json_filename = filename.with_suffix(".json")
